@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import os
 
 from pathlib import Path
 
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'accounts',
     'core',
     'transactions',
+    'exchange',
 ]
 
 MIDDLEWARE = [
@@ -134,9 +136,18 @@ MINIMUM_DEPOSIT_AMOUNT = 10
 MINIMUM_WITHDRAWAL_AMOUNT = 10
 
 STATIC_URL = 'static/'
+MEDIA_URL ='images/'
 STATICFILES_DIRS = [ 
     BASE_DIR / "static",
     ]
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
 
 # Celery Settings
 CELERY_BROKER_URL = 'redis://localhost:6379'
