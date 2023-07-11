@@ -10,9 +10,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'banking_system.settings')
 
 app = Celery('banking_system')
 
-# Using a string here means the worker doesn't have to serialize
-# the configuration object to child processes.
-# - namespace='CELERY' means all celery-related configuration keys
+
 #   should have a `CELERY_` prefix.
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
@@ -22,7 +20,6 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'calculate_interest': {
         'task': 'calculate_interest',
-        # http://docs.celeryproject.org/en/latest/userguide/periodic-tasks.html
         'schedule': crontab(0, 0, day_of_month='1'),
     }
 }
