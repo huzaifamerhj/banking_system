@@ -4,7 +4,7 @@ from django.shortcuts import render
 from . import views
 
 def aboutus(request):
-    return render(request,'core/base.html')
+    return render(request,'core/about_us.html')
     
 
 
