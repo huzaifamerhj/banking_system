@@ -1,43 +1,78 @@
-{% extends 'core/base.html' %} {% load static %} {% block head_title %}Banking System{% endblock %} {% block content %}
-
-<h1> Tranfer Section </h1>
-
-		
-		<table class="c_table">
-			
-				<tr>
-					<th>Account UsernameNo.</th>
-					<th>Account Type</th>
-					<th>Account No:</th>
-					<th>Account Gender</th>
-					<th>ccount Birthdate</th>
-					<th>ccount Balance</th>
-				</tr>
-			
-			
-				{% for list in userbankaccount %}
-				<tr>
-					<td>{{list.user}}</td>
-					<td>{{list.account_type}}</td>
-					<td>{{list.account_no}}</td>
-					<td>{{list.gender}}</td>
-					<td>{{list.birth_date}}</td>
-					<td>{{list.balance}}</td>
-					
-				</tr>
-				
-				
-				{% endfor %}
-			
-
-		</table>
+{% extends 'core/base.html' %} {% load static %} {% block head_title %}Banking System{% endblock %}
+ {% block content %}
 
 
+ <div class="my-10 py-3 px-4 bg-white rounded-xl shadow-md">
+    <h1 class="font-mono font-bold text-3xl text-center pb-5 pt-2">Transaction Report</h1>
+    <hr />
+
+
+ <form method="get" id="filter">
+	<div class="flex justify-center">
+		<div class="mt-10 h-10 pl-3 pr-2 bg-white border rounded-md border-gray-500 flex justify-between items-center relative  w-4/12">
+			<input type="search" name="daterange" id="search" placeholder="Filter using date range" class="appearance-none w-full outline-none focus:outline-none active:outline-none" autocomplete="off" value="{{ request.GET.daterange}}" />
+			<button type="submit" class="ml-1 outline-none focus:outline-none active:outline-none">
+				<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6">
+					<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+				</svg>
+			</button>
+		</div>
+	</div>
+	{% if form.daterange.errors %} {% for error in form.daterange.errors %}
+	<p class="text-red-600 text-sm italic">{{ error }}</p>
+	{% endfor %} {% endif %}
+</form>
+	<table class="table-auto mx-auto w-full mt-8 border-collapse">
+	<thead class="bg-gray-800 text-white">
+		<tr class="uppercase font-semibold text-sm">
+			<th class=" border border-black px-4 py-2">User</th>
+			<th class=" border border-black px-4 py-2">Account Type</th>
+			<th class=" border border-black px-4 py-2">account No</th>
+			<th class=" border border-black px-4 py-2">Gender</th>
+			<th class=" border border-black px-4 py-2">Birthdate</th>
+			<th class=" border border-black px-4 py-2">Current Balance</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		{% for list in userbankaccount %}
+		<tr class="{% cycle 'bg-gray-600' 'bg-gray-500' %}">
+			<td class="border border-blue-900 px-4 py-2"> {{list.user}} </td>
+			<td class="border border-blue-900 px-4 py-2"> {{list.account_type}} </td>
+			<td class="border border-blue-900 px-4 py-2"> {{list.account_no}} </td>
+			<td class="border border-blue-900 px-4 py-2"> {{list.gender}} </td>
+			<td class="border border-blue-900 px-4 py-2"> {{list.birth_date}} </td>
+			<td class="border border-blue-900 px-4 py-2"> {{list.balance}} </td>
+		</tr>
+		{% endfor %}
+		{% comment %} <tr class="bg-gray-600 text-white">
+			<th class="border border-blue-900 px-4 py-2 text-right" colspan="3">Current Balance</th>
+			<th class="border border-blue-900 px-4 py-2 text-right">$ {{ list.balance }}</th>
+		</tr> {% endcomment %}
+	</tbody>
+</table>
+
+
+<div>
+    <form action="" method="POST">
+        {% csrf_token %}
+           
+            <label>Enter the Account Number</label>
+            <input type="text" name="acount_no">
+      
+            <label>Enter the Amount Number</label>
+            <input type="number" name="amountno">
+      
+          <input type="submit" name="transfer">    
+      
+        </form>
+
+</div>   
 
 
 
-    <a href=" {% url 'maketransfer' %} " style="background-color: white; color: darkblue;font-size: 50px"> <button> Tranfer </button></a>
+<a href=" {% url 'maketransfer' %} " style="background-color: white; color: darkblue;font-size: 50px"> <button> Tranfer </button></a>
 
-
+</div>
 
 {% endblock %}

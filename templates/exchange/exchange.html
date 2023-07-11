@@ -1,14 +1,9 @@
 {% extends 'core/base.html' %} {% load static %} {% block head_title %}Banking System{% endblock %} {% block content %}
-<<<<<<< HEAD
 <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">   
-<h2 style="font-size: 34px;margin-left: 10cm;color: white;"> Please Choose Your Facorite Currency </h2>
-=======
-
-
-   <h2 style="font-size: 34px;margin-left: 10cm;color: lightblue;"> Please Choose Your Facorite Currency </h2>
->>>>>>> b3e033f0560c9f52c19b878c13e361a0ed17296c
-    <div class="container">
+<div class="my-10 py-3 px-4 bg-dark rounded-xl shadow-md">
+  <h1 class="font-mono font-bold text-3xl text-center pb-5 pt-2">Please Choose Your Favorite Currency</h1>
+  <div class="container">
     <div class="page-header" id="banner">
       <div class="row">
         <div class="col-sm-15">
@@ -18,6 +13,7 @@
         </div>
       </div>
     </div>
+  </div>
 
   <div class="container">
     <div class="currency">
@@ -148,6 +144,8 @@
   </div>
   <br><br><br>
 
+</div>
 
   <script src=" {%  static 'js/app.js' %}  "></script>
+
 {% endblock %}
