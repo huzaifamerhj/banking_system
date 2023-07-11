@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'core',
     'transactions',
     'exchange',
+    'transfer',
 ]
 
 MIDDLEWARE = [

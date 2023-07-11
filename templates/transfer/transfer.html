@@ -1,0 +1,43 @@
+{% extends 'core/base.html' %} {% load static %} {% block head_title %}Banking System{% endblock %} {% block content %}
+
+<h1> Tranfer Section </h1>
+
+		
+		<table class="c_table">
+			
+				<tr>
+					<th>Account UsernameNo.</th>
+					<th>Account Type</th>
+					<th>Account No:</th>
+					<th>Account Gender</th>
+					<th>ccount Birthdate</th>
+					<th>ccount Balance</th>
+				</tr>
+			
+			
+				{% for list in userbankaccount %}
+				<tr>
+					<td>{{list.user}}</td>
+					<td>{{list.account_type}}</td>
+					<td>{{list.account_no}}</td>
+					<td>{{list.gender}}</td>
+					<td>{{list.birth_date}}</td>
+					<td>{{list.balance}}</td>
+					
+				</tr>
+				
+				
+				{% endfor %}
+			
+
+		</table>
+
+
+
+
+
+    <a href=" {% url 'maketransfer' %} " style="background-color: white; color: darkblue;font-size: 50px"> <button> Tranfer </button></a>
+
+
+
+{% endblock %}
