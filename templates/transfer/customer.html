@@ -1,0 +1,66 @@
+
+{% extends 'core/base.html' %} {% load static %} {% block head_title %}Banking System{% endblock %} {% block content %}
+
+
+
+<div class="my-10 py-3 px-4 bg-white rounded-xl shadow-md">
+    <h1 class="font-mono font-bold text-3xl text-center pb-5 pt-2">Transfer Page</h1>
+    
+
+<table class="table-auto mx-auto w-full mt-8 border-collapse">
+	<thead class="bg-gray-800 text-white">
+		<tr class="uppercase font-semibold text-sm">
+			<th class=" border border-black px-4 py-2">No</th>
+			<th class=" border border-black px-4 py-2">Name</th>
+			<th class=" border border-black px-4 py-2">Email</th>
+			<th class=" border border-black px-4 py-2">Amount Balance</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		{% for list in customer %}
+		<tr class="{% cycle 'bg-gray-600' 'bg-gray-500' %}">
+			<td class="border border-blue-900 px-4 py-2"> {{list.id}} </td>
+			<td class="border border-blue-900 px-4 py-2"> {{list.name}} </td>
+			<td class="border border-blue-900 px-4 py-2"> {{list.email}} </td>
+			<td class="border border-blue-900 px-4 py-2"> {{list.available_bal}} </td>
+		
+		</tr>
+		{% endfor %}
+		{% comment %} <tr class="bg-gray-600 text-white">
+			<th class="border border-blue-900 px-4 py-2 text-right" colspan="3">Current Balance</th>
+			<th class="border border-blue-900 px-4 py-2 text-right">$ {{ list.balance }}</th>
+		</tr> {% endcomment %}
+	</tbody>
+</table>
+</br>
+<div ><center>
+    <h2 class="t2">SEND MONEY</h2>
+    <form method="post">{% csrf_token %}
+    <div class = "form-group"class="text-field">
+        <label for="exampleInputEmail1">Email</label>
+        <input type="email" class = "form-control" id="exampleInputEmail1"aria-describedby="emailHelp" name="semail" placeholder="Enter your Email">
+    </div>
+    <div class= "form-group"class="text-field">
+        <label >Amount</label>
+        <input type="Amount" name="amt" class = "form-control" id = "Amount"placeholder="Enter Amount">
+    </div></br>
+        <select id="email" name="email">
+            <option value="alanfernandes@gmail.com">Select Reciever Email</option>
+            {% for i in customer %}
+            <option value="{{i.email}}">{{i.name}}</option>
+            {% endfor %}
+
+        </select></br></br>
+        <input type="submit" class="btn btn-primary" name="submit" value="SEND"></input>
+
+    </form>
+</center></div>
+
+
+
+</div>
+
+ 
+{% endblock %}
+

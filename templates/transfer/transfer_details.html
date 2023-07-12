@@ -1,0 +1,46 @@
+
+{% extends 'core/base.html' %} {% load static %} {% block head_title %}Banking System{% endblock %} {% block content %}
+
+
+
+<div class="my-10 py-3 px-4 bg-white rounded-xl shadow-md">
+    <h1 class="font-mono font-bold text-3xl text-center pb-5 pt-2">Transfer Details</h1>
+    
+
+<table class="table-auto mx-auto w-full mt-8 border-collapse">
+	<thead class="bg-gray-800 text-white">
+		<tr class="uppercase font-semibold text-sm">
+			<th class=" border border-black px-4 py-2">No</th>
+			<th class=" border border-black px-4 py-2">Name</th>
+			<th class=" border border-black px-4 py-2">Email</th>
+            <th class=" border border-black px-4 py-2">Account Balance</th>
+            <th class=" border border-black px-4 py-2">Transfer Amount</th>
+			<th class=" border border-black px-4 py-2">Available Balance</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		{% for list in transfer %}
+		<tr class="{% cycle 'bg-gray-600' 'bg-gray-500' %}">
+			<td class="border border-blue-900 px-4 py-2"> {{list.id}} </td>
+			<td class="border border-blue-900 px-4 py-2"> {{list.name}} </td>
+			<td class="border border-blue-900 px-4 py-2"> {{list.email}} </td>
+            <td class="border border-blue-900 px-4 py-2"> {{list.debitted_amt}} </td>
+            <td class="border border-blue-900 px-4 py-2"> {{list.credited_amt}} </td>
+            <td class="border border-blue-900 px-4 py-2"> {{list.account_bal}} </td>
+			
+		</tr>
+		{% endfor %}
+		{% comment %} <tr class="bg-gray-600 text-white">
+			<th class="border border-blue-900 px-4 py-2 text-right" colspan="3">Current Balance</th>
+			<th class="border border-blue-900 px-4 py-2 text-right">$ {{ list.balance }}</th>
+		</tr> {% endcomment %}
+	</tbody>
+</table>
+</br>
+
+
+</div>
+ 
+{% endblock %}
+

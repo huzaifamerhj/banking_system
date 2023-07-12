@@ -53,25 +53,10 @@
 </table>
 
 
-<div>
-    <form action="" method="POST">
-        {% csrf_token %}
-           
-            <label>Enter the Account Number</label>
-            <input type="text" name="acount_no">
-      
-            <label>Enter the Amount Number</label>
-            <input type="number" name="amountno">
-      
-          <input type="submit" name="transfer">    
-      
-        </form>
-
-</div>   
+</br>
 
 
-
-<a href=" {% url 'maketransfer' %} " style="background-color: white; color: darkblue;font-size: 50px"> <button> Tranfer </button></a>
+<a href=" {% url 'customer' %} " style="background-color: white; color: darkblue;font-size: 50px"> <button> Tranfer </button></a>
 
 </div>
 
