@@ -73,3 +73,120 @@ class LogoutView(RedirectView):
         if self.request.user.is_authenticated:
             logout(self.request)
         return super().get_redirect_url(*args, **kwargs)
+
+
+
+
+###########################
+
+from django.shortcuts import render,HttpResponseRedirect
+from . import forms
+from .forms import TransactionForm
+from . models import *
+from decimal import *
+from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+# Create your views here.
+def send(request):
+    transfer =Transfer.objects.all()
+    Context ={'transfer':transfer}
+    return render(request, 'accounts/send.html',Context)
+
+
+
+
+def Transfermoney(request):
+    if request.method == 'POST':
+        form = forms.TransactionForm(request.POST)
+        if form.is_valid():
+            from_account_number = form.cleaned_data.get('from_account')
+            to_account_number = form.cleaned_data.get('to_account')
+            amount = form.cleaned_data.get('amount')
+
+            sender = Account.objects.get(account_number=from_account_number)
+            if sender.account_balance >= amount:
+                # Create and save the transaction object
+                trans = Transfer.objects.create(
+                    owner=request.user,
+                    from_account=sender,
+                    to_account=to_account_number,
+                    amount=amount
+                )
+
+                # Debit the sender account
+                sender.account_balance -= amount
+                sender.save()
+
+                # Credit the receiver account
+                receiver = Account.objects.get(account_number=to_account_number)
+                receiver.account_balance += amount
+                receiver.save()
+
+                return HttpResponseRedirect(reverse_lazy('send'))
+    else:
+        form = forms.TransactionForm()
+
+    return render(request, "accounts/transfer.html", {'form': form})
+
+
+# def send(request):
+    if request.method == 'POST':
+        form = forms.TransactionForm(request.POST)
+        if form.is_valid():
+            sender = Account.objects.get(account_number=request.POST.get('from_account'))
+            if sender.account_balance > int(request.POST.get('amount')):
+
+                # Create and save the transaction object
+                trans = Transaction.objects.create(
+                    owner=request.user,
+                    from_account=sender,
+                    to_account=request.POST.get('to_account'),
+                    amount=int(request.POST.get('amount'))
+                )
+
+                # Debit the sender account
+                sender.account_balance -= int(request.POST.get('amount'))
+                sender.save()
+
+                # Credit the receiver account
+                receiver = Account.objects.get(account_number=request.POST.get('to_account'))
+                receiver.account_balance += int(request.POST.get('amount'))
+                receiver.save()
+
+                return HttpResponseRedirect(reverse_lazy('send'))
+    else:
+        form = forms.TransactionForm()
+
+    return render(request, "index.html", {'form': form})
+
+
+
+
+# def send(request):
+
+    
+    if request.method == 'POST':
+        form = forms.TransactionForm(request.POST)
+        if form.is_valid():
+            sender = Account.objects.get(account_number=request.POST.get('from_account'))
+            if sender.account_balance > int(request.POST.get('amount')):
+
+                trans =  form.save()
+                trans.owner = request.user
+                trans.save()
+
+                # debit the sender account
+                sender.account_balance -= int(request.POST.get('amount'))
+                sender.save()
+
+                #credit the receiver account
+                receiver = Account.objects.get(account_number=request.POST.get('to_account'))
+                receiver.account_balance += int(request.POST.get('amount'))
+                receiver.save()
+
+                return HttpResponseRedirect(reverse_lazy('customers:history'))
+            # else:
+            #     return 
+    else:
+        form = forms.TransactionForm()
+        return render(request, "index.html", {'form': form})

@@ -86,3 +86,29 @@ class UserRegistrationForm(UserCreationForm):
                 )
             )
         return user
+
+
+
+
+##################################
+from django import forms
+from .models import UserBankAccount, Account
+
+class TransactionForm(forms.Form):
+    from_account = forms.ModelChoiceField(queryset=Account.objects.all())
+    to_account = forms.ModelChoiceField(queryset=Account.objects.all())
+    amount = forms.DecimalField()
+
+    def clean(self):
+        cleaned_data = super().clean()
+        from_account = cleaned_data.get('from_account')
+        to_account = cleaned_data.get('to_account')
+        amount = cleaned_data.get('amount')
+
+        if from_account and to_account and amount:
+            if from_account.account_balance < amount:
+                raise forms.ValidationError("Insufficient balance in the sender's account.")
+            if from_account == to_account:
+                raise forms.ValidationError("Sender and receiver accounts cannot be the same.")
+
+        return cleaned_data

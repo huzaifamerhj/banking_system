@@ -107,8 +107,35 @@ class UserBankAccount(models.Model):
         )
         start = self.interest_start_date.month
         return [i for i in range(start, 13, interval)]
+class Account(models.Model):
+      ACCOUNT_TYPES = (
+          ('SA' , 'Savings Account' ),
+          ('CA' , 'Current Account' ),
+          ('JA' , 'Joint Account' ),
+      )
+      owner = models.OneToOneField(User, on_delete=models.CASCADE, 
+      related_name='accounts', verbose_name='The related user')
+      account_type = models.CharField(max_length=2, choices=ACCOUNT_TYPES)
+      account_number = models.CharField(max_length=13, unique=True)
+      account_balance = models.DecimalField(max_digits=18, decimal_places=2)
+      last_deposit = models.DecimalField(max_digits=10, decimal_places=2)
+      interest_rate = models.DecimalField(max_digits=3, decimal_places=0)
+      date_created = models.DateField(auto_now_add=True)
 
+      def __str__(self):
+          return self.account_number
 
+class Transfer(models.Model):
+      owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, 
+      null=True)
+      from_account = models.CharField(max_length=13)
+      to_account = models.CharField(max_length=13)
+      amount = models.DecimalField(max_digits=10, decimal_places=2)
+      date_created = models.DateField(auto_now_add=True)
+
+      def __str__(self):
+        return str(self.amount)
+    
 class UserAddress(models.Model):
     user = models.OneToOneField(
         User,

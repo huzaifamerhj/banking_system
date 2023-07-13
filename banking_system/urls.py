@@ -17,9 +17,12 @@ from django.contrib import admin
 from django.urls import include, path
 
 from core.views import HomeView
-
+from accounts.views import Transfermoney, send
 
 urlpatterns = [
+    
+    path('transfer/', Transfermoney, name="transfer"),
+    path('send/', send, name="send"),
     path('', HomeView.as_view(), name='home'),
     path('aboutus/', include('core.urls')),
     path('tranfer/', include('transfer.urls')),

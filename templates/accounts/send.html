@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %} {% load static %} {% block head_title %}Banking System{% endblock %} 
+{% block content %}
+<div class="my-10 py-3 px-4 bg-gray-500 rounded-xl shadow-md">
+    <h1 class="font-mono font-bold text-3xl text-center pb-5 pt-2">Transfer Page</h1>
+    
+<h1>You succssfully Added</H1>
+
+    <table class="table-auto mx-auto w-full mt-8 border-collapse">
+        <thead class="bg-gray-800 text-white">
+            <tr class="uppercase font-semibold text-sm">
+                <th class=" border border-black px-4 py-2">No</th>
+                <th class=" border border-black px-4 py-2">Name</th>
+                <th class=" border border-black px-4 py-2">Account-from</th>
+                <th class=" border border-black px-4 py-2">Account-To </th>
+                <th class=" border border-black px-4 py-2">Transfer Amount</th>
+                <th class=" border border-black px-4 py-2">Available Balance</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            {% for list in transfer %}
+            <tr class="{% cycle 'bg-gray-600' 'bg-gray-500' %}">
+                <td class="border border-blue-900 px-4 py-2"> {{list.id}} </td>
+                <td class="border border-blue-900 px-4 py-2"> {{list.owner}} </td>
+                <td class="border border-blue-900 px-4 py-2"> {{list.from_account}} </td>
+                <td class="border border-blue-900 px-4 py-2"> {{list.to_account}} </td>
+                <td class="border border-blue-900 px-4 py-2"> {{list.amount}} </td>
+                <td class="border border-blue-900 px-4 py-2"> {{list.date_created}} </td>
+                
+            </tr>
+            {% endfor %}
+            {% comment %} <tr class="bg-gray-600 text-white">
+                <th class="border border-blue-900 px-4 py-2 text-right" colspan="3">Current Balance</th>
+                <th class="border border-blue-900 px-4 py-2 text-right">$ {{ list.balance }}</th>
+            </tr> {% endcomment %}
+        </tbody>
+    </table
+
+
+
+    </div>
+{% endblock %}

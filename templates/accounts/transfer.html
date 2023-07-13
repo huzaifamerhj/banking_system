@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %} {% load static %} {% block head_title %}Banking System{% endblock %} 
+{% block content %}
+
+<div class="my-10 py-3 px-4 bg-gray-600 rounded-xl shadow-md">
+  <h1 class="font-mono font-bold black text-3xl text-center pb-5 pt-2">Transfer Page</h1>
+  
+
+
+  <div ><center>
+  <form class="form" action=" {% url 'transfer' %}" method="POST" >
+    {% csrf_token %}
+
+ 
+    <div class="form__group" class="text_field">
+    
+       {{form}}
+    </div>
+
+    
+    <div class="form__action">
+        <button class="btn btn-primary"  value="Send" type="submit">Send</button>
+    </div>
+  </form>
+</center>
+</div> 
+</body>
+
+{% comment %} 
+  <div ><center>
+
+    <form class="form" action="{% url 'send' %}" method="POST">
+        {% csrf_token %}
+      
+        <div class="form__group" class="text-field">
+          <input type="text" name="from_account" placeholder="From Account Number" required >
+          <input type="text" name="to_account" placeholder="To Account Number"required>
+          <input type="text" name="amount" placeholder="Amount" required>
+        </div>
+        <br>
+        <div class="form__action">
+        <button class="btn btn-primary" value="Send" type="submit">Send</button>
+        </div>
+      </form>
+    </center>
+  </div> {% endcomment %}
+
+    </div>
+{% endblock %}

@@ -1,5 +1,8 @@
 from django.shortcuts import render
 
+from accounts.models import UserBankAccount
+
+
 # from . fixer_api import get_exchange_rate
 # # Create your views here.
 
@@ -12,5 +15,7 @@ from django.shortcuts import render
 #     return render(request, 'exchange/exchange_view.html', context)
   
 def exchange(request):
-  
-    return render(request,'exchange/exchange.html')
+    userbankaccount = UserBankAccount.objects.all()
+    context ={'userbankaccount': userbankaccount}
+    return render(request,'exchange/exchange.html',context)
+   
