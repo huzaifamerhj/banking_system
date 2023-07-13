@@ -1,7 +1,7 @@
-{% extends 'core/base.html' %} {% load static %} {% block head_title %}Banking System{% endblock %} 
+{% extends 'core/base.html' %} {% load static %} {% block head_title %}Transfer Process{% endblock %} 
 {% block content %}
 
-<div class="my-10 py-3 px-4 bg-gray-600 rounded-xl shadow-md">
+<div class="my-10 py-3 px-4 bg-gray-500 rounded-xl shadow-md">
   <h1 class="font-mono font-bold black text-3xl text-center pb-5 pt-2">Transfer Page</h1>
   
 
@@ -15,14 +15,18 @@
     
        {{form}}
     </div>
-
+<br>
     
-    <div class="form__action">
-        <button class="btn btn-primary"  value="Send" type="submit">Send</button>
-    </div>
+<div class="flex w-full justify-center">
+  <button class="bg-blue-900 text-white hover:text-blue-900 hover:bg-white border border-blue-900 font-bold px-4 py-2" type="submit">
+  Submit
+</button>
+</div>
   </form>
 </center>
 </div> 
+
+
 </body>
 
 {% comment %} 

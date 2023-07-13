@@ -108,14 +108,10 @@ class UserBankAccount(models.Model):
         start = self.interest_start_date.month
         return [i for i in range(start, 13, interval)]
 class Account(models.Model):
-      ACCOUNT_TYPES = (
-          ('SA' , 'Savings Account' ),
-          ('CA' , 'Current Account' ),
-          ('JA' , 'Joint Account' ),
-      )
+ 
       owner = models.OneToOneField(User, on_delete=models.CASCADE, 
       related_name='accounts', verbose_name='The related user')
-      account_type = models.CharField(max_length=2, choices=ACCOUNT_TYPES)
+    
       account_number = models.CharField(max_length=13, unique=True)
       account_balance = models.DecimalField(max_digits=18, decimal_places=2)
       last_deposit = models.DecimalField(max_digits=10, decimal_places=2)

@@ -1,8 +1,9 @@
-{% extends 'core/base.html' %} {% load static %} {% block head_title %}Banking System{% endblock %} {% block content %}
+{% extends 'core/base.html' %} {% load static %} {% block head_title %}Exchange Process{% endblock %} {% block content %}
 
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">   
-<div class="my-10 py-3 px-4 bg-gray-300 rounded-xl shadow-md">
-  <h1 class="font-mono font-bold text-3xl text-center pb-5 pt-2">Please Choose Your Favorite Currency</h1>
+<div class="my-10 py-3 px-4 bg-gray-500 rounded-xl shadow-md">
+  <h1 class="font-mono font-bold text-3xl text-center pb-5 pt-2" style="color:black">Please Choose Your Favorite Currency</h1>
   <div class="container">
     <div class="page-header" id="banner">
       <div class="row">
@@ -17,7 +18,7 @@
 
   <div class="container">
     <div class="currency">
-       <select class="form-control" id="currency-one">
+       <select class="form-control" id="currency-one" style="width:100%">
         <option value="AED">AED</option>
         <option value="ARS">ARS</option>
         <option value="AUD">AUD</option>
@@ -27,7 +28,7 @@
         <option value="CAD">CAD</option>
         <option value="CHF">CHF</option>
         <option value="CLP">CLP</option>
-        <option value="CNY">CNY</option>
+        <option value="CNY"selected >CNY</option>
         <option value="COP">COP</option>
         <option value="CZK">CZK</option>
         <option value="DKK">DKK</option>
@@ -66,7 +67,7 @@
         <option value="TRY">TRY</option>
         <option value="TWD">TWD</option>
         <option value="UAH">UAH</option>
-        <option value="USD" selected>USD</option>
+        <option value="USD">USD</option>
         <option value="UYU">UYU</option>
         <option value="VND">VND</option>
         <option value="ZAR">ZAR</option>
@@ -76,15 +77,17 @@
     </div>
 </div>
 <br>
-  <div class="swap-btn">
-    <button type="button" id="swap" class="btn btn-outline-primary mx-auto d-block" >Swap <i class="fa fa-refresh" aria-hidden="true"></i></button>
+  <div class="swap-btn" class="flex w-full justify-center"><center>
+    <button type="button" id="swap" class="bg-blue-900 text-white hover:text-blue-900 hover:bg-white border border-blue-900 font-bold px-4 py-2" >Swap <i class="fa fa-refresh" aria-hidden="true"></i></button>
+  </center>
   </div>
+ 
   <!-- Dynamic rate inserted in DOM based on exchange rate fetched from API -->
   <div class="rate" id="rate"></div>
     <br>
     <div class="container">
       <div class="currency">
-         <select class="form-control" id="currency-two">
+         <select class="form-control" id="currency-two" style="width:100%">
           <option value="AED">AED</option>
           <option value="ARS">ARS</option>
           <option value="AUD">AUD</option>

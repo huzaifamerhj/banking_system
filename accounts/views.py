@@ -121,10 +121,15 @@ def Transfermoney(request):
                 receiver = Account.objects.get(account_number=to_account_number)
                 receiver.account_balance += amount
                 receiver.save()
-
+                
+                messages.success(request,
+                 f'Successfully Transfered {"{:,.2f}".format(float(amount))}$ from your account'
+        )
                 return HttpResponseRedirect(reverse_lazy('send'))
     else:
         form = forms.TransactionForm()
+        
+    
 
     return render(request, "accounts/transfer.html", {'form': form})
 
